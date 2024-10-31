@@ -18,13 +18,13 @@ func assertError(t *testing.T, err error, target error) {
 func TestHandler_WrongNUmberOfArguments(t *testing.T) {
 	handler := NewHandler(nil, nil)
 	err := handler.Handle(nil)
-	assertError(t, err, errWrongNUmberofThings)
+	assertError(t, err, errWrongNumberofThings)
 }
 
 func TestHandler_InvalidFirstArgument(t *testing.T) {
 	handler := NewHandler(nil, nil)
 	err := handler.Handle([]string{"Invalid", "3"})
-	assertError(t, err, errWrongNUmberofThings)
+	assertError(t, err, errInvalidArg)
 }
 
 func TestHandler_HappyPath(t *testing.T) {

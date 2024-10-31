@@ -23,11 +23,11 @@ func NewHandler(stdout io.Writer, calculator *calc.Addition) *Handler {
 
 func (this *Handler) Handle(args []string) error {
 	if len(args) != 2 {
-		return errWrongNUmberofThings
+		return errWrongNumberofThings
 	}
 	a, err := strconv.Atoi(args[0])
 	if err != nil {
-		return err
+		return errInvalidArg
 	}
 
 	b, err := strconv.Atoi(args[1])
@@ -46,5 +46,5 @@ func (this *Handler) Handle(args []string) error {
 	return nil
 }
 
-var errWrongNUmberofThings = errors.New("Wrong number of things.")
+var errWrongNumberofThings = errors.New("Wrong number of things.")
 var errInvalidArg = errors.New("Invalid Arg.")
