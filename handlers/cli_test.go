@@ -34,13 +34,11 @@ func TestHandler_HappyPath(t *testing.T) {
 	assertError(t, err, nil)
 }
 
-//func TestHandler_InvalidSecondArgument(t *testing.T) {
-//	handler := NewHandler(nil, nil)
-//	err := handler.Handle([]string{"1", "invalid"})
-//	if !errors.Is(err, errInvalidArg) {
-//		t.Error("wrong error")
-//	}
-//}
+func TestHandler_InvalidSecondArgument(t *testing.T) {
+	handler := NewHandler(nil, nil)
+	err := handler.Handle([]string{"1", "invalid"})
+	assertError(t, err, errInvalidArg)
+}
 
 func TestHandler_OutputWriter(t *testing.T) {
 	badError := errors.New("badError")

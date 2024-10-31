@@ -33,7 +33,7 @@ func (this *Handler) Handle(args []string) error {
 	b, err := strconv.Atoi(args[1])
 
 	if err != nil {
-		return err
+		return errInvalidArg
 	}
 
 	result := this.calculator.Calculate(a, b)
