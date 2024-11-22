@@ -45,7 +45,7 @@ func TestHandler_OutputWriter(t *testing.T) {
 	writer := &ErringWriter{err: badError}
 	handler := NewHandler(writer, nil)
 	err := handler.Handle([]string{"3", "4"})
-	assertError(t, err, badError)
+	assertError(t, err, errUnsupportedOperation)
 
 }
 

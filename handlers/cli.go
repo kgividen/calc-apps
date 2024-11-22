@@ -12,13 +12,13 @@ type Calculator interface {
 }
 
 type Handler struct {
-	stdout     io.Writer
+	writer     io.Writer
 	calculator Calculator
 }
 
-func NewHandler(stdout io.Writer, calculator Calculator) *Handler {
+func NewHandler(writer io.Writer, calculator Calculator) *Handler {
 	return &Handler{
-		stdout:     stdout,
+		writer:     writer,
 		calculator: calculator,
 	}
 }
@@ -38,8 +38,12 @@ func (this *Handler) Handle(args []string) error {
 		return errInvalidArg
 	}
 
+	if this.calculator == nil {
+		return errUnsupportedOperation
+	}
+
 	result := this.calculator.Calculate(a, b)
-	_, err = fmt.Fprint(this.stdout, result)
+	_, err = fmt.Fprint(this.writer, result)
 
 	if err != nil {
 		return err
@@ -48,5 +52,6 @@ func (this *Handler) Handle(args []string) error {
 	return nil
 }
 
+var errUnsupportedOperation = errors.New("Unsupported operation.")
 var errWrongNumberofThings = errors.New("Wrong number of things.")
 var errInvalidArg = errors.New("Invalid Arg.")
